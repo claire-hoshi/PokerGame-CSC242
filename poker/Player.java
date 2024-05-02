@@ -42,7 +42,6 @@ public class Player {
 
     // Method to evaluate and display the best hand
     public void evaluateHand(Card[] communityCards) {
-        HandEvaluator evaluator = new HandEvaluator();
         Card[] combinedCards = new Card[7]; // 2 hole cards + 5 community cards
 
         // Combine player's hole cards and community cards
@@ -50,7 +49,6 @@ public class Player {
         System.arraycopy(communityCards, 0, combinedCards, 2, 5);
 
         // Evaluate the best hand
-        Hand bestHand = evaluator.evaluateHand(combinedCards);
         System.out.println("Best hand for " + username + ": " + bestHand);
     }
 }
