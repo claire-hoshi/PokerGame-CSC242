@@ -1,14 +1,13 @@
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-
-// import org.junit.jupiter.api.Test;
-
 public class Main {
-  public static void main(String[] args) {
-    System.out.println("Hello world!");
-  }
+    public static void main(String[] args) {
+        // Create an online poker game instance
+        OnlinePokerGame pokerGame = new OnlinePokerGame();
 
-  // @Test
-  // void addition() {
-  //     assertEquals(2, 1 + 1);
-  // }
+        // Add players to the game
+        pokerGame.addPlayer(new Player("Player 1"));
+        pokerGame.addPlayer(new Player("Player 2"));
+
+        // Start the game
+        pokerGame.startGame();
+    }
 }
