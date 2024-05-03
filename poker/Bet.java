@@ -1,11 +1,17 @@
 public class Bet {
     private Player player;
 
+    public Bet(Player player) {
+        this.player = player;
+    }
+
     public void place() {
-        // Code to place a bet
+        // Placeholder code to place a bet
+        System.out.println(player.getUsername() + " placed a bet.");
     }
 
     public void check() {
-        // Code to check
+        // Placeholder code to check
+        System.out.println(player.getUsername() + " checked.");
     }
 }
