@@ -49,7 +49,7 @@ public class Player {
         System.arraycopy(communityCards, 0, combinedCards, 2, 5);
 
         // Evaluate the best hand
-        System.out.println("Best hand for " + username + ": " + bestHand);
+        System.out.println("Best hand for " + getUsername() + ": " + bestHand);
     }
 }
 

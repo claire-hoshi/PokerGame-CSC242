@@ -9,7 +9,7 @@ public class ShortDeck extends Deck {
       List<Card> toRemove = new ArrayList<>();
       for(Card card: cards)
         {
-          if(card.getRank().getValue() < Rank.SIX.getValue(){
+          if(card.getRank().getValue() < Rank.SIX.getValue()){
             toRemove.add(card);
           }
         }
