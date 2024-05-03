@@ -78,6 +78,26 @@ public class Hand {
     return true;
   }
 
+  private boolean isFullHouse()
+  {
+    int rankCount1 = 0;
+    int rankCount2 = 0;
+    int currentRank = cards[0].getRankValue();
+
+    for(Card card: cards){
+      if(card.getRankValue() == currentRank)
+      {
+        rankCount1++;
+      }
+      else{
+        currentRank = card.getRankValue();
+        rankCount2 = 1;
+      }
+    }
+
+    return(rankCount1 == 3 && rankCount2 == 2) || (rankCount1 == 2 && rankCount2 == 3);
+  }
+    
     // public int compareTo(Hand otherHand) {
     //     // Code to compare hands
     //     return 0;
