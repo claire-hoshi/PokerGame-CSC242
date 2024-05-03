@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-    private List<Card> cards;
+    private final List<Card> cards;
 
     public Deck() {
         this.cards = new ArrayList<>();
@@ -30,6 +30,15 @@ public class Deck {
             return null;
         }
         return cards.remove(0); // Deal the top card (first card in the list)
+    }
+
+    //method return suit value
+    public static String[] getSuitValues(){ 
+      return new String[] {"SPADES", "HEARTS", "DIAMONDS", "CLUBS"};
+    }
+    //method return rank value
+    public static String[] getRankValues(){
+      return new Srtring[] {"SIX", "SEVEN", "EIGHT", "NINE", "TEN", "JACK", "QUEEN", "KING", "ACE"};
     }
 }
 
