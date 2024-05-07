@@ -3,22 +3,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class Card {
-    protected final String rank;
-    protected final String suite;
-
+    private final int rank;
+    private final int suit;
+  
     //constructor 
-    public Card(String rank, String suit)
+    public Card(int rank, int suit)
     {
       this.rank = rank;
       this.suit = suit;
     }
   
-    public String getRank() {
+    public int getRank() {
         // Code to get rank
         return rank;
     }
 
-    public String getSuit() {
+    public int getSuit() {
         // Code to get suite
         return suit;
     }
@@ -44,7 +44,20 @@ public class Card {
           throw new IllegalArguementException("Invalid Rank card:");
       }
     }
-  public int compareTo(Card otherCard){
+
+   public int getSuitValue()
+  {
+    //detect string of the card to the integer 
+    switch(suit)
+      {
+        case "SPADES": return 1;
+        case "HEARTS": return 2;
+        case "DIAMONDS": return 3;
+        case "CLUBS": return 4;
+      }
+  }
+  
+    public int compareTo(Card otherCard){
     return this.getRankValue() - otherCard.getRankValue(); //compare based on rank value
   }
 }
