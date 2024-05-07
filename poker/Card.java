@@ -3,8 +3,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Card {
-    private final String rank;
-    private final String suite;
+    protected final String rank;
+    protected final String suite;
 
     //constructor 
     public Card(String rank, String suit)
@@ -18,15 +18,19 @@ public class Card {
         return rank;
     }
 
-    public String getSuite() {
+    public String getSuit() {
         // Code to get suite
-        return suite;
+        return suit;
     }
 
     public int getRankValue()
     {
       //detect the string of the card to the integer 
       switch(rank){
+        case "TWO": return 2;
+        case "THREE": return 3;
+        case "FOUR": return 4;
+        case "FIVE": return 5;
         case "SIX": return 6;
         case "SEVEN": return 7;
         case "EIGHT": return 8;
