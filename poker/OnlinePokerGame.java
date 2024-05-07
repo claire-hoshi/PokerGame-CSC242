@@ -1,7 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnlinePokerGame {
+interface PokerGameInterFace {
+    void startGame(int numberOfPlayers); // Initializes and starts a new poker game
+    void dealHands(); // Deals the hands to each player
+    void placeBet(Player player, int amount); // Places a bet for a given player
+    Player determineWinner(); // Determines and returns the winner of the game
+    void addPlayer(Player player); // Adds a player to the game
+    void removePlayer(Player player); // Removes a player from the game
+    void showPlayerHands(); // Optional, shows each player's hand for all to see
+}
+
+public class OnlinePokerGame implements PokerGameInterFace {
     private List<Player> players;
     private int currentPlayerIndex;
 
@@ -14,7 +24,7 @@ public class OnlinePokerGame {
         players.add(player);
     }
 
-    public void startGame() {
+    public void startGame(int numberOfPlayers) {
         dealPrivateCards();
         showCommunityCards();
         determineWinner();
@@ -55,14 +65,19 @@ public class OnlinePokerGame {
         System.out.println("Community Card: " + communityCards[4].toString());
     }
 
-    private Player determineWinner() {
-        // Determine the winner based on the best hand
+    public Player determineWinner() {
         Hand bestHand = null;
         Player winner = null;
 
+        // Assuming there are mechanisms to combine private and community cards
+        // Not shown here for brevity
+
         for (Player player : players) {
-            Hand hand = new Hand();
-            hand.evaluate(player.getPrivateCards());
+            Card[] privateCards = player.getPrivateCards(); // Assuming this method exists
+            // Combine privateCards with communityCards here before passing to Hand
+            Hand hand = new Hand(combinedCards); // combinedCards should be a mix of private and community cards
+
+            // Evaluate or compare hands here
             if (bestHand == null || hand.compareTo(bestHand) > 0) {
                 bestHand = hand;
                 winner = player;
@@ -70,7 +85,6 @@ public class OnlinePokerGame {
         }
 
         System.out.println("Winner: " + winner.getUsername() + " with hand: " + bestHand);
-
         return winner;
     }
 }

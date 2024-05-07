@@ -8,6 +8,6 @@ public class Main {
         OnlinePokerGame pokerGame = new OnlinePokerGame(); // Added import for OnlinePokerGame class
         pokerGame.addPlayer(new Player("Player 1"));
         pokerGame.addPlayer(new Player("Player 2"));
-        pokerGame.startGame();
+        pokerGame.startGame(2);
     }
 }

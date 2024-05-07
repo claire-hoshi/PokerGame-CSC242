@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Card {
     private final int rank;
     private final int suit;
-
+  
     //constructor 
     public Card(int rank, int suit)
     {
@@ -14,15 +18,19 @@ public class Card {
         return rank;
     }
 
-    public int getSuite() {
+    public int getSuit() {
         // Code to get suite
-        return suite;
+        return suit;
     }
 
     public int getRankValue()
     {
       //detect the string of the card to the integer 
       switch(rank){
+        case "TWO": return 2;
+        case "THREE": return 3;
+        case "FOUR": return 4;
+        case "FIVE": return 5;
         case "SIX": return 6;
         case "SEVEN": return 7;
         case "EIGHT": return 8;

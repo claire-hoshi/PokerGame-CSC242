@@ -1,19 +1,22 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+//import poker.CardSuit;
+//import poker.CardRank;
 
 public class Deck {
-    private final List<Card> cards;
+    protected final List<Card> cards;
 
     public Deck() {
         this.cards = new ArrayList<>();
         initializeDeck();
     }
 
-    private void initializeDeck() {
+    public void initializeDeck() {
         // Create standard 52-card deck
-        for (CardSuit suit : CardSuit.values()) {
-            for (CardRank rank : CardRank.values()) {
+        Card card = new Card(rank, suit); // Create an instance of Card to access non-static methods
+        for (String suit : card.getSuitValues()) {
+            for (String rank : card.getRankValues()) {
                 cards.add(new Card(rank, suit));
             }
         }
@@ -31,14 +34,4 @@ public class Deck {
         }
         return cards.remove(0); // Deal the top card (first card in the list)
     }
-
-    //method return suit value
-    public static String[] getSuitValues(){ 
-      return new String[] {"SPADES", "HEARTS", "DIAMONDS", "CLUBS"};
-    }
-    //method return rank value
-    public static String[] getRankValues(){
-      return new Srtring[] {"SIX", "SEVEN", "EIGHT", "NINE", "TEN", "JACK", "QUEEN", "KING", "ACE"};
-    }
 }
-
