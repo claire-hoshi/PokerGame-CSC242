@@ -13,8 +13,11 @@ public class Deck {
         initializeDeck();
     }
 
-    public enum Suit {
-        HEARTS, DIAMONDS, CLUBS, SPADES;
+    public enum Suit { 
+        HEARTS, 
+        DIAMONDS, 
+        CLUBS, 
+        SPADES;
     }
 
     public enum Rank {
@@ -34,13 +37,12 @@ public class Deck {
     }
 
     public void initializeDeck() {
-        // Create standard 52-card deck
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 cards.add(new Card(rank, suit));
             }
         }
-        shuffle(); // Shuffle the deck after initialization
+        shuffle(); 
     }
 
     public void shuffle() {

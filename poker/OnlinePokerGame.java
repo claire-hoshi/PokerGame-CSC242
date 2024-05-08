@@ -40,8 +40,11 @@ public class OnlinePokerGame implements PokerGameInterface {
         }
     }
 
+    //check!!!
     public void startGame(int numberOfPlayers) { 
         dealHands();
+        placeBet(playerUsername, willWin);
+        determineWinner();
     }
 
     public void dealHands() {
