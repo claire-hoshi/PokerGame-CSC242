@@ -8,6 +8,9 @@ public class Main {
         OnlinePokerGame pokerGame = new OnlinePokerGame(); 
         pokerGame.addPlayer(new Player("Player 1"));
         pokerGame.addPlayer(new Player("Player 2"));
-        pokerGame.startGame(2);
+        pokerGame.addPlayer(new Player("Player 3"));
+        pokerGame.addPlayer(new Player("Player 4"));
+        
+        pokerGame.startGame(4);
     }
 }
