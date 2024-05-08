@@ -15,7 +15,7 @@ interface PokerGameInterface{
 public class OnlinePokerGame implements PokerGameInterface {
     private List<Player> players;
     private int currentPlayerIndex;
-    private Map<Player, Boolean> bets; // Change the type to Map<Player, Boolean>
+    private Map<Player, Boolean> bets; 
 
     public OnlinePokerGame() {
         this.players = new ArrayList<>();
@@ -67,9 +67,6 @@ public class OnlinePokerGame implements PokerGameInterface {
         Player winner = null;
         for (Player player : players) {
             Card[] privateCards = player.getPrivateCards();
-            // Combine privateCards with communityCards here before passing to Hand
-            // Hand hand = new Hand(combinedCards);
-            // Compare or evaluate hands...
         }
         System.out.println("Winner: " + winner.getUsername() + " with hand: " + bestHand);
         return winner;
