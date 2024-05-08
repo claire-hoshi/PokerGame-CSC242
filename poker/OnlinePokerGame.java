@@ -1,90 +1,87 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
-interface PokerGameInterFace {
-    void startGame(int numberOfPlayers); // Initializes and starts a new poker game
-    void dealHands(); // Deals the hands to each player
-    void placeBet(Player player, int amount); // Places a bet for a given player
-    Player determineWinner(); // Determines and returns the winner of the game
-    void addPlayer(Player player); // Adds a player to the game
-    void removePlayer(Player player); // Removes a player from the game
-    void showPlayerHands(); // Optional, shows each player's hand for all to see
+interface PokerGameInterface{
+    void addPlayer(Player player);
+    void startGame(int numberOfPlayers);
+    void dealHands();
+    void placeBet(String playerUsername, boolean willWin);
+    Player determineWinner();
+    boolean isPlayerInGame(String playerUsername);
 }
 
-public class OnlinePokerGame implements PokerGameInterFace {
+public class OnlinePokerGame implements PokerGameInterface {
     private List<Player> players;
     private int currentPlayerIndex;
+    private Map<Player, Boolean> bets; // Change the type to Map<Player, Boolean>
 
     public OnlinePokerGame() {
         this.players = new ArrayList<>();
         this.currentPlayerIndex = 0;
+        this.bets = new HashMap<>();
     }
 
     public void addPlayer(Player player) {
         players.add(player);
     }
 
-    public void startGame(int numberOfPlayers) {
-        dealPrivateCards();
-        showCommunityCards();
-        determineWinner();
+    public void removePlayer(Player player) {
+        boolean removed = players.remove(player);
+        if (removed) {
+            bets.remove(player);
+            for (Map<Player, Boolean> betsByOthers : bets.values()) {
+                betsByOthers.remove(player);
+            }
+            System.out.println(player.getUsername() + " has been removed from the game.");
+        } else {
+            System.out.println("Could not find " + player.getUsername() + " in the game.");
+        }
     }
 
-    private void dealPrivateCards() {
+    public void startGame(int numberOfPlayers) { 
+        dealHands();
+    }
+
+    public void dealHands() {
         Deck deck = new Deck();
         deck.shuffle();
-
-        // Deal 2 private cards to each player
         for (Player player : players) {
             Card[] privateCards = {deck.deal(), deck.deal()};
             player.setPrivateCards(privateCards);
         }
     }
 
-    private void showCommunityCards() {
-        Deck deck = new Deck();
-        deck.shuffle();
-
-        // Deal 3 community cards
-        Card[] communityCards = new Card[5];
-        for (int i = 0; i < 3; i++) {
-            communityCards[i] = deck.deal();
+    public void placeBet(String playerUsername, boolean willWin) {
+        if (!isPlayerInGame(playerUsername)) {
+            System.out.println(playerUsername + " is not part of the game.");
+            return;
         }
-
-        // Show community cards
-        System.out.println("Community Cards: " + communityCards[0].toString() + ", " 
-                                                + communityCards[1].toString() + ", " 
-                                                + communityCards[2].toString());
-
-        // Deal and show the fourth community card
-        communityCards[3] = deck.deal();
-        System.out.println("Community Card: " + communityCards[3].toString());
-
-        // Deal and show the fifth community card
-        communityCards[4] = deck.deal();
-        System.out.println("Community Card: " + communityCards[4].toString());
+        bets.put(players.get(currentPlayerIndex), willWin);
+        System.out.println(playerUsername + " has placed a bet on " + (willWin ? "winning" : "losing"));
     }
 
     public Player determineWinner() {
         Hand bestHand = null;
         Player winner = null;
-
-        // Assuming there are mechanisms to combine private and community cards
-        // Not shown here for brevity
-
         for (Player player : players) {
-            Card[] privateCards = player.getPrivateCards(); // Assuming this method exists
+            Card[] privateCards = player.getPrivateCards();
             // Combine privateCards with communityCards here before passing to Hand
-            Hand hand = new Hand(combinedCards); // combinedCards should be a mix of private and community cards
-
-            // Evaluate or compare hands here
-            if (bestHand == null || hand.compareTo(bestHand) > 0) {
-                bestHand = hand;
-                winner = player;
-            }
+            // Hand hand = new Hand(combinedCards);
+            // Compare or evaluate hands...
         }
-
         System.out.println("Winner: " + winner.getUsername() + " with hand: " + bestHand);
         return winner;
     }
+
+    public boolean isPlayerInGame(String playerUsername) {
+        for (Player player : players) {
+            if (player.getUsername().equals(playerUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+

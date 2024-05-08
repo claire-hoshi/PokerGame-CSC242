@@ -1,63 +1,72 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Card {
     private final int rank;
-    private final int suit;
-  
-    //constructor 
-    public Card(int rank, int suit)
-    {
-      this.rank = rank;
-      this.suit = suit;
+    private final String suit;
+
+    // Map to store rank string to integer mapping
+    private static final Map<String, Integer> RANK_MAP = new HashMap<>();
+    static {
+        RANK_MAP.put("TWO", 2);
+        RANK_MAP.put("THREE", 3);
+        RANK_MAP.put("FOUR", 4);
+        RANK_MAP.put("FIVE", 5);
+        RANK_MAP.put("SIX", 6);
+        RANK_MAP.put("SEVEN", 7);
+        RANK_MAP.put("EIGHT", 8);
+        RANK_MAP.put("NINE", 9);
+        RANK_MAP.put("TEN", 10);
+        RANK_MAP.put("JACK", 11);
+        RANK_MAP.put("QUEEN", 12);
+        RANK_MAP.put("KING", 13);
+        RANK_MAP.put("ACE", 14);
     }
-  
+
+    // Map to store suit string to integer mapping
+    private static final Map<String, Integer> SUIT_MAP = new HashMap<>();
+    static {
+        SUIT_MAP.put("SPADES", 1);
+        SUIT_MAP.put("HEARTS", 2);
+        SUIT_MAP.put("DIAMONDS", 3);
+        SUIT_MAP.put("CLUBS", 4);
+    }
+
+    //constructor 
+    public Card(int rank, String suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+
     public int getRank() {
         // Code to get rank
         return rank;
     }
 
-    public int getSuit() {
+    public String getSuit() {
         // Code to get suite
         return suit;
     }
 
-    public int getRankValue()
-    {
-      //detect the string of the card to the integer 
-      switch(rank){
-        case "TWO": return 2;
-        case "THREE": return 3;
-        case "FOUR": return 4;
-        case "FIVE": return 5;
-        case "SIX": return 6;
-        case "SEVEN": return 7;
-        case "EIGHT": return 8;
-        case "NINE": return 9;
-        case "TEN": return 10;
-        case "JACK": return 11;
-        case "QUEEN": return 12;
-        case "KING": return 13;
-        case "ACE": return 14;
-        default:
-          throw new IllegalArguementException("Invalid Rank card:");
-      }
+    public int getRankValue() {
+        // Get the rank value from the map
+        Integer rankValue = RANK_MAP.get(rank);
+        if (rankValue == null) {
+            throw new IllegalArgumentException("Invalid Rank card: " + rank);
+        }
+        return rankValue;
     }
 
-   public int getSuitValue()
-  {
-    //detect string of the card to the integer 
-    switch(suit)
-      {
-        case "SPADES": return 1;
-        case "HEARTS": return 2;
-        case "DIAMONDS": return 3;
-        case "CLUBS": return 4;
-      }
-  }
-  
-    public int compareTo(Card otherCard){
-    return this.getRankValue() - otherCard.getRankValue(); //compare based on rank value
-  }
+    public int getSuitValue() {
+        // Get the suit value from the map
+        Integer suitValue = SUIT_MAP.get(suit);
+        if (suitValue == null) {
+            throw new IllegalArgumentException("Invalid Suit card: " + suit);
+        }
+        return suitValue;
+    }
+
+    public int compareTo(Card otherCard) {
+        return this.getRankValue() - otherCard.getRankValue(); //compare based on rank value
+    }
 }

@@ -1,38 +1,41 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class ShortDeck extends Deck {
-    public ShortDeck()
-    {
-      super(); //call constructor of Deck class
-      removeLowCards(); //remove cards below 
+    public ShortDeck() {
+        super(); // Call constructor of Deck class
+        removeLowCards(); // Remove cards below rank six
     }
 
-    private void removeLowCards(){
-      List<Card> toRemove = new ArrayList<>();
-      for(Card card: cards)
-        {
-          if(card.getRank().getValue() < Rank.SIX.getValue()){
-            toRemove.add(card);
-          }
+    private void removeLowCards() {
+        List<Card> toRemove = new ArrayList<>();
+        for (Card card : cards) {
+            if (card.getRank().getRankValue() < Rank.SIX.getRankValue()) {
+                toRemove.add(card);
+            }
         }
-      cards.removeAll(toRemove);
+        cards.removeAll(toRemove);
     }
 
-  @Override //shuffle method
-  public void shuffle() {
-    Collections.shuffle(cards);
-  }
+    @Override // Override shuffle method
+    public void shuffle() {
+        Collections.shuffle(cards);
+    }
 
-//     public void reset() {
-//         // Code to reset the deck
-      
-//     }
+    // Define the Rank enum with getRankValue() method
+    public enum Rank {
+        TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10),
+        JACK(11), QUEEN(12), KING(13), ACE(14);
 
-//     public void shuffle() {
-//         // Code to shuffle the deck
-//     }
+        private final int rankValue;
 
-//     public Card topCard() {
-//         // Code to get the top card
-//         return null;
-//     }
-// }
+        Rank(int rankValue) {
+            this.rankValue = rankValue;
+        }
+
+        public int getRankValue() {
+            return rankValue;
+        }
+    }
 }

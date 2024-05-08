@@ -1,68 +1,62 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Player {
     private String username;
-    private Card[] hand;
+    private List<Card> hand;
+    private Card[] privateCards;
 
     public Player(String username) {
         this.username = username;
-        this.hand = new Card[2]; // Assuming each player starts with two hole cards
+        this.hand = new ArrayList<>(); // Using ArrayList to store cards
     }
 
     public void logIn() {
-        // Placeholder code to log in
         System.out.println(username + " logged in.");
     }
 
     public void signUp() {
-        // Placeholder code to sign up
         System.out.println(username + " signed up.");
     }
 
     public void joinTable() {
-        // Placeholder code to join a table
         System.out.println(username + " joined a table.");
     }
 
-    private void bet() {
-        // Placeholder code for betting
-        System.out.println(username + " placed a bet.");
-    }
-
     public void revealHoleCards() {
-        // Reveal hole cards
-        System.out.println("Hole cards for " + username + ": " + hand[0] + ", " + hand[1]);
+        System.out.println("Hole cards for " + username + ": " + hand.get(0) + ", " + hand.get(1));
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setHand(Card[] hand) {
+    public void setHand(List<Card> hand) {
         this.hand = hand;
     }
-  
-    public Card[] getHand(){
-      
-    }
-  
-    public int getCardNumber(){
-      
+
+    public Card[] getHand() {
+        // Convert the List<Card> to Card[] and return it
+        return hand.toArray(new Card[0]);
     }
 
-    // Method to evaluate and display the best hand
+    public int getCardNumber() {
+        return hand.size();
+    }
+
+    public void setPrivateCards(Card[] privateCards) {
+        this.privateCards = privateCards;
+    }
+
+    public Card[] getPrivateCards() {
+        return privateCards;
+    }
+
     public void evaluateHand(Card[] communityCards) {
         Card[] combinedCards = new Card[7]; // 2 hole cards + 5 community cards
 
         // Combine player's hole cards and community cards
-        System.arraycopy(hand, 0, combinedCards, 0, 2);
+        System.arraycopy(hand.toArray(), 0, combinedCards, 0, 2);
         System.arraycopy(communityCards, 0, combinedCards, 2, 5);
-
-        // Evaluate the best hand
-        System.out.println("Best hand for " + getUsername() + ": " + bestHand);
     }
 }
-
-
