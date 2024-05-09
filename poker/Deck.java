@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Enumeration;
 
 public class Deck {
     protected final List<Card> cards;
@@ -39,7 +40,9 @@ public class Deck {
     public void initializeDeck() {
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-                cards.add(new Card(rank, suit));
+                int rankValue = rank.ordinal();
+                int suitsValue = suit.ordinal();
+                cards.add(rankValue, new Card(rankValue, suit.name()));
             }
         }
         shuffle(); 

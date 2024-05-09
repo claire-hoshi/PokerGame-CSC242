@@ -31,10 +31,12 @@ public class OnlinePokerGame implements PokerGameInterface {
         boolean removed = players.remove(player);
         if (removed) {
             bets.remove(player);
-            for (Map<Player, Boolean> betsByOthers : bets.values()) {
-                betsByOthers.remove(player);
+            for (Map.Entry<Player, Boolean> entry : bets.entrySet()) {
+                Player currentPlayer = entry.getKey(); // Changed variable name from player to currentPlayer
+                Boolean betStatus = entry.getValue();
+
+                System.out.println(currentPlayer.getUsername() + " has been removed from the game.");
             }
-            System.out.println(player.getUsername() + " has been removed from the game.");
         } else {
             System.out.println("Could not find " + player.getUsername() + " in the game.");
         }
@@ -42,6 +44,7 @@ public class OnlinePokerGame implements PokerGameInterface {
 
     //check!!!
     public void startGame(int numberOfPlayers) { 
+        addPlayer(player);
         dealHands();
         placeBet(playerUsername, willWin);
         determineWinner();

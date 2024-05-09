@@ -8,7 +8,7 @@ public class Player {
 
     public Player(String username) {
         this.username = username;
-        this.hand = new ArrayList<>(); // Using ArrayList to store cards
+        this.hand = new ArrayList<>(); //ArrayList to store cards
     }
 
     public void logIn() {

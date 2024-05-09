@@ -11,7 +11,7 @@ public class ShortDeck extends Deck {
     private void removeLowCards() {
         List<Card> toRemove = new ArrayList<>();
         for (Card card : cards) {
-            if (card.getRank().getRankValue() < Rank.SIX.getRankValue()) {
+            if (card.getRank() < Rank.SIX.ordinal()) {
                 toRemove.add(card);
             }
         }
