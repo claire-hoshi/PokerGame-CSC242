@@ -1,30 +1,33 @@
+////////////////////////////////////////////////////////////////////////////////
+// File: Card.java
+// Course: CSC242, Spring Semester
+// Authors: Claire Hoshi, Charlotte Zhao, Laura Bui, Lily Nguyen
+//
+////////////////////////////////////////////////////////////////////////////////
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class Card {
-    private final int rank;
+/**
+ * The Card class represents a playing card with a rank and a suit.
+ * Each card has an integer rank value and a string suit value.
+ */
+public class Card implements Comparable<Card> {
+    private final CardUtils.Rank rank;
     private final String suit;
 
-    // Map to store rank string to integer mapping
-    private static final Map<String, Integer> RANK_MAP = new HashMap<>();
+    // Map to store Rank enum to integer mapping
+    private static final Map<CardUtils.Rank, Integer> RANK_MAP = new HashMap<>();
+
     static {
-        RANK_MAP.put("TWO", 2);
-        RANK_MAP.put("THREE", 3);
-        RANK_MAP.put("FOUR", 4);
-        RANK_MAP.put("FIVE", 5);
-        RANK_MAP.put("SIX", 6);
-        RANK_MAP.put("SEVEN", 7);
-        RANK_MAP.put("EIGHT", 8);
-        RANK_MAP.put("NINE", 9);
-        RANK_MAP.put("TEN", 10);
-        RANK_MAP.put("JACK", 11);
-        RANK_MAP.put("QUEEN", 12);
-        RANK_MAP.put("KING", 13);
-        RANK_MAP.put("ACE", 14);
+        for (CardUtils.Rank rank : CardUtils.Rank.values()) {
+            RANK_MAP.put(rank, rank.getRankValue());
+        }
     }
 
     // Map to store suit string to integer mapping
     private static final Map<String, Integer> SUIT_MAP = new HashMap<>();
+
     static {
         SUIT_MAP.put("SPADES", 1);
         SUIT_MAP.put("HEARTS", 2);
@@ -32,19 +35,41 @@ public class Card {
         SUIT_MAP.put("CLUBS", 4);
     }
 
-    public Card(int rank, String suit) {
+    /**
+     * Constructs a card with the specified rank and suit.
+     *
+     * @param rank the rank of the card
+     * @param suit the suit of the card
+     */
+    public Card(CardUtils.Rank rank, String suit) {
         this.rank = rank;
         this.suit = suit;
     }
 
-    public int getRank() {
+    /**
+     * Returns the rank of the card.
+     *
+     * @return the rank of the card
+     */
+    public CardUtils.Rank getRank() {
         return rank;
     }
 
+    /**
+     * Returns the suit of the card.
+     *
+     * @return the suit of the card
+     */
     public String getSuit() {
         return suit;
     }
 
+    /**
+     * Returns the integer value of the rank.
+     *
+     * @return the integer value of the rank
+     * @throws IllegalArgumentException if the rank is invalid
+     */
     public int getRankValue() {
         Integer rankValue = RANK_MAP.get(rank);
         if (rankValue == null) {
@@ -53,6 +78,12 @@ public class Card {
         return rankValue;
     }
 
+    /**
+     * Returns the integer value of the suit.
+     *
+     * @return the integer value of the suit
+     * @throws IllegalArgumentException if the suit is invalid
+     */
     public int getSuitValue() {
         Integer suitValue = SUIT_MAP.get(suit);
         if (suitValue == null) {
@@ -61,6 +92,13 @@ public class Card {
         return suitValue;
     }
 
+    /**
+     * Compares this card with another card based on rank.
+     *
+     * @param otherCard the other card to compare
+     * @return a negative integer, zero, or a positive integer as this card is less than, equal to, or greater than the specified card
+     */
+    @Override
     public int compareTo(Card otherCard) {
         return Integer.compare(this.getRankValue(), otherCard.getRankValue());
     }
