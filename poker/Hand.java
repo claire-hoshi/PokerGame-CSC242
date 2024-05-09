@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Hand {
+public class Hand implements Comparable<Hand> {
     private Card[] cards;
 
     public Hand(Card[] cards) {
@@ -90,8 +90,9 @@ public class Hand {
         return (rankCount1 == 3 && rankCount2 == 2) || (rankCount1 == 2 && rankCount2 == 3);
     }
 
-    // public int compareTo(Hand otherHand) {
-    //     // Code to compare hands
-    //     return 0;
-    // }
+     @Override
+    public int compareTo(Hand otherHand) {
+        // Compare hands based on their ranks
+        return Integer.compare(this.evaluate().compareTo(otherHand.evaluate()), 0);
+    }   
 }

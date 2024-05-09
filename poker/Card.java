@@ -32,24 +32,20 @@ public class Card {
         SUIT_MAP.put("CLUBS", 4);
     }
 
-    //constructor 
     public Card(int rank, String suit) {
         this.rank = rank;
         this.suit = suit;
     }
 
     public int getRank() {
-        // Code to get rank
         return rank;
     }
 
     public String getSuit() {
-        // Code to get suite
         return suit;
     }
 
     public int getRankValue() {
-        // Get the rank value from the map
         Integer rankValue = RANK_MAP.get(rank);
         if (rankValue == null) {
             throw new IllegalArgumentException("Invalid Rank card: " + rank);
@@ -58,7 +54,6 @@ public class Card {
     }
 
     public int getSuitValue() {
-        // Get the suit value from the map
         Integer suitValue = SUIT_MAP.get(suit);
         if (suitValue == null) {
             throw new IllegalArgumentException("Invalid Suit card: " + suit);
@@ -67,6 +62,6 @@ public class Card {
     }
 
     public int compareTo(Card otherCard) {
-        return this.getRankValue() - otherCard.getRankValue(); //compare based on rank value
+        return Integer.compare(this.getRankValue(), otherCard.getRankValue());
     }
 }

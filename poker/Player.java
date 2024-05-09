@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
     private String username;
@@ -13,18 +14,6 @@ public class Player {
 
     public void logIn() {
         System.out.println(username + " logged in.");
-    }
-
-    public void signUp() {
-        System.out.println(username + " signed up.");
-    }
-
-    public void joinTable() {
-        System.out.println(username + " joined a table.");
-    }
-
-    public void revealHoleCards() {
-        System.out.println("Hole cards for " + username + ": " + hand.get(0) + ", " + hand.get(1));
     }
 
     public String getUsername() {
