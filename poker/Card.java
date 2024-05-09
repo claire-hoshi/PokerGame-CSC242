@@ -5,14 +5,14 @@ import java.util.List;
 public class Card {
     private final int rank;
     private final int suit;
-  
+
     //constructor 
     public Card(int rank, int suit)
     {
       this.rank = rank;
       this.suit = suit;
     }
-  
+
     public int getRank() {
         // Code to get rank
         return rank;
@@ -56,7 +56,7 @@ public class Card {
         case "CLUBS": return 4;
       }
   }
-  
+
     public int compareTo(Card otherCard){
     return this.getRankValue() - otherCard.getRankValue(); //compare based on rank value
   }

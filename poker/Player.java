@@ -43,13 +43,13 @@ public class Player {
     public void setHand(Card[] hand) {
         this.hand = hand;
     }
-  
+
     public Card[] getHand(){
-      
+
     }
-  
+
     public int getCardNumber(){
-      
+
     }
 
     // Method to evaluate and display the best hand
