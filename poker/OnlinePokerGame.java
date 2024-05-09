@@ -13,6 +13,7 @@ interface PokerGameInterface{
 }
 
 public class OnlinePokerGame implements PokerGameInterface {
+    private Player player;
     private List<Player> players;
     private int currentPlayerIndex;
     private Map<Player, Boolean> bets; 
@@ -32,7 +33,8 @@ public class OnlinePokerGame implements PokerGameInterface {
         if (removed) {
             bets.remove(player);
             for (Map.Entry<Player, Boolean> entry : bets.entrySet()) {
-                Player currentPlayer = entry.getKey(); // Changed variable name from player to currentPlayer
+                Player currentPlayer = entry.getKey(); 
+                // Changed variable name from player to currentPlayer
                 Boolean betStatus = entry.getValue();
 
                 System.out.println(currentPlayer.getUsername() + " has been removed from the game.");
@@ -42,11 +44,9 @@ public class OnlinePokerGame implements PokerGameInterface {
         }
     }
 
-    //check!!!
     public void startGame(int numberOfPlayers) { 
-        addPlayer(player);
         dealHands();
-        placeBet(playerUsername, willWin);
+        placeBet(players.get(0).getUsername(), true);
         determineWinner();
     }
 
@@ -69,22 +69,27 @@ public class OnlinePokerGame implements PokerGameInterface {
     }
 
     public Player determineWinner() {
-        Hand bestHand = null;
-        Player winner = null;
-        for (Player player : players) {
-            Card[] privateCards = player.getPrivateCards();
-        }
-        System.out.println("Winner: " + winner.getUsername() + " with hand: " + bestHand);
-        return winner;
-    }
-
-    public boolean isPlayerInGame(String playerUsername) {
-        for (Player player : players) {
-            if (player.getUsername().equals(playerUsername)) {
-                return true;
+            if (player != null) {
+                String playerUsername = player.getUsername();
+            } else {
+                throw new IllegalArgumentException("Player is null. Cannot determine a winner.");
             }
+            Hand bestHand = null;
+            Player winner = null;
+            for (Player player : players) {
+                Card[] privateCards = player.getPrivateCards();
+                // Logic to determine the best hand and winner
+            }
+            System.out.println("Winner: " + winner.getUsername() + " with hand: " + bestHand);
+            return winner;
         }
-        return false;
-    }
-}
 
+        public boolean isPlayerInGame(String playerUsername) {
+            for (Player player : players) {
+                if (player.getUsername().equals(playerUsername)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
